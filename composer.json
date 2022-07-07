@@ -1,0 +1,12 @@
+{
+    "name": "iqual-ch/ci-pocketknife-installer",
+    "description": "Delivers a version-managed copy of the ci-pocketknife toolset.",
+    "authors": [
+        {
+            "name": "Stefanos Petrakis",
+            "email": "s.petrakis@iqual.ch"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
