@@ -12,18 +12,26 @@ inputs:
     required: false
     default: /tmp/ci
   ci_vr_docker_network:
-    description: 'Network switch for docker'
+    description: 'Network switch for dockery'
     required: false
     default: host
 runs:
   using: "composite"
   steps:
+    - name: Set up environment variables
+      shell: bash
+      run: |
+        echo "CI_VR_WORKING_FOLDER=${{ inputs.ci_vr_working_folder }}" >> $GITHUB_ENV && \
+        echo "CI_VR_REFERENCE_WEBSITE_URL=${{ inputs.ci_vr_reference_website_url }}" >> $GITHUB_ENV && \
+        echo "CI_VR_TEST_WEBSITE_URL=${{ inputs.ci_vr_test_website_url }}" >> $GITHUB_ENV && \
+        echo "CI_VR_DOCKER_NETWORK=${{ inputs.ci_vr_docker_network }}" >> $GITHUB_ENV
+
     - name: Install automated testing tools
       shell: bash
       run: |
         cd app/vendor/iqual-ch/ci-pocketknife-installer/ && \
         source installer.sh && \
-        echo "$CI_VR_WORKING_FOLDER/bin" >> $GITHUB_PATH
+        echo "${{ inputs.ci_vr_working_folder }}/bin" >> $GITHUB_PATH
 
     - name: Collect internal URLs starting from the homepage
       shell: bash
