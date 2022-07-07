@@ -45,6 +45,16 @@ runs:
         g glue:backstop:config --uris='/app/data/crawled_urls_reference.csv' --url=$CI_VR_TEST_WEBSITE_URL --referenceUrl=$CI_VR_REFERENCE_WEBSITE_URL > $CI_VR_WORKING_FOLDER/backstop_config.json  && \
         cat $CI_VR_WORKING_FOLDER/backstop_config.json
 
+    - name: Generate references for BackstopJS
+      shell: bash
+      run: |
+        g glue:backstop:reference --config '/app/data/backstop_config.json'
+
+    - name: Run tests for BackstopJS
+      shell: bash
+      run: |
+        g glue:backstop:test --config '/app/data/backstop_config.json'
+
     - name: Generate report
       if: always()
       shell: bash
