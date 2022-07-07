@@ -1,0 +1,51 @@
+name: 'CI-Pocketknife visual regression action'
+description: 'It allows running visual regression tests as actions'
+inputs:
+  ci_vr_reference_website_url:
+    description: 'Reference URL'
+    required: true
+  ci_vr_test_website_url:
+    description: 'Test URL'
+    required: true
+  ci_vr_working_folder:
+    description: 'Working folder on host'
+    required: false
+    default: /tmp/ci
+  ci_vr_docker_network:
+    description: 'Network switch for docker'
+    required: false
+    default: host
+runs:
+  using: "composite"
+  steps:
+    - name: Install automated testing tools
+      shell: bash
+      run: |
+        cd app/vendor/iqual-ch/ci-pocketknife-installer/ && \
+        source installer.sh && \
+        echo "$CI_VR_WORKING_FOLDER/bin" >> $GITHUB_PATH
+
+    - name: Collect internal URLs starting from the homepage
+      shell: bash
+      run: |
+        g glue:lynx-crawl $CI_VR_REFERENCE_WEBSITE_URL > $CI_VR_WORKING_FOLDER/crawled_urls_reference.csv && \
+        cat $CI_VR_WORKING_FOLDER/crawled_urls_reference.csv
+
+    - name: Dynamic configuration for BackstopJS
+      shell: bash
+      run: |
+        g glue:backstop:config --uris='/app/data/crawled_urls_reference.csv' --url=$CI_VR_TEST_WEBSITE_URL --referenceUrl=$CI_VR_REFERENCE_WEBSITE_URL > $CI_VR_WORKING_FOLDER/backstop_config.json  && \
+        cat $CI_VR_WORKING_FOLDER/backstop_config.json
+
+    - name: Generate report
+      if: always()
+      shell: bash
+      run: |
+        g glue:report
+
+    - name: Upload report
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: backstopjs-report
+        path: $CI_VR_WORKING_FOLDER/report.pdf
