@@ -66,4 +66,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
-        path: $CI_VR_WORKING_FOLDER/report.pdf
+        path: ${{ inputs.ci_vr_working_folder }}/report.pdf
