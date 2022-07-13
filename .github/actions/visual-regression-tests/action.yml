@@ -29,7 +29,7 @@ runs:
       run: |
         echo "CI_VR_WORKING_FOLDER=${{ inputs.ci_vr_working_folder }}" >> $GITHUB_ENV && \
         echo "CI_VR_REFERENCE_WEBSITE_URL=${{ inputs.ci_vr_reference_website_url }}" >> $GITHUB_ENV && \
-        echo "CI_VR_URL_LIST_LIMIT=${{ inputs.ci_vr_url_list_limit > 0 && join(fromJson([\"--limit\", inputs.ci_vr_url_list_limit]), ' ') || '' }}" >> $GITHUB_ENV && \
+        echo "CI_VR_URL_LIST_LIMIT=${{ inputs.ci_vr_url_list_limit > 0 && '--limit ' || '' }}${{ inputs.ci_vr_url_list_limit > 0 && inputs.ci_vr_url_list_limit || '' }}" >> $GITHUB_ENV && \
         echo "CI_VR_URL_LIST_RANDOMIZE=${{ inputs.ci_vr_url_list_randomize > 0 && '--random' || '' }}" >> $GITHUB_ENV && \
         echo "CI_VR_TEST_WEBSITE_URL=${{ inputs.ci_vr_test_website_url }}" >> $GITHUB_ENV && \
         echo "CI_VR_DOCKER_NETWORK=${{ inputs.ci_vr_docker_network }}" >> $GITHUB_ENV
