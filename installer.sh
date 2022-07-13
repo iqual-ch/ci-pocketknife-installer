@@ -9,7 +9,7 @@
 # + CI_VR_WORKING_FOLDER=/tmp/ci
 # + CI_VR_DOCKER_NETWORK=host
 
-CI_VR_TOOLS_DOCKER_TAG=1.0.1
+CI_VR_TOOLS_DOCKER_TAG=1.0.2
 CI_VR_WORKING_FOLDER="${CI_VR_WORKING_FOLDER:-/tmp/ci}"
 CI_VR_DOCKER_NETWORK="${CI_VR_DOCKER_NETWORK:-host}"
 
@@ -23,7 +23,13 @@ docker pull iqualch/ci-pocketknife:$CI_VR_TOOLS_DOCKER_TAG
 cat << EOF > ${CI_VR_WORKING_FOLDER}/bin/g
 #!$(which bash)
 
-docker run -e CI_VR_REFERENCE_WEBSITE_URL -e CI_VR_TEST_WEBSITE_URL -v ${CI_VR_WORKING_FOLDER}:/app/data  --network ${CI_VR_DOCKER_NETWORK} --rm iqualch/ci-pocketknife:${CI_VR_TOOLS_DOCKER_TAG} "\$@"
+docker run \
+    -e CI_VR_REFERENCE_WEBSITE_URL \
+    -e CI_VR_TEST_WEBSITE_URL \
+    -v ${CI_VR_WORKING_FOLDER}:/app/data \
+    --network ${CI_VR_DOCKER_NETWORK} \
+    --rm \
+    iqualch/ci-pocketknife:${CI_VR_TOOLS_DOCKER_TAG} "\$@"
 
 EOF
 
