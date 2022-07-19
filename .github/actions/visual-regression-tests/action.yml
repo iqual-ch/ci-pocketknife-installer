@@ -30,7 +30,7 @@ runs:
       run: |
         cd app/vendor/iqual-ch/ci-pocketknife-installer/ && \
         source installer.sh && \
-        echo "${{ inputs.ci_vr_working_folder }}/bin" >> $GITHUB_PATH
+        echo $CI_VR_WORKING_FOLDER/bin" >> $GITHUB_PATH
 
     - name: Collect internal URLs starting from the homepage
       shell: bash
@@ -65,4 +65,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
-        path: ${{ inputs.ci_vr_working_folder }}/report.pdf
+        path: ${{ env.CI_VR_WORKING_FOLDER }}/report.pdf
