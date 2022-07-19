@@ -9,19 +9,10 @@
     ],
     "minimum-stability": "dev",
     "repositories": {
-        "drupal": {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
         "private-packagist": {
             "type": "composer",
             "url": "https://repo.packagist.com/iqual/"
-        },
-        "js-libraries": {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        },
-        "packagist.org": false
+        }
     },
     "require": {
         "iqual-ch/ci-github-actions": "1.0.5"
