@@ -30,7 +30,7 @@ runs:
       run: |
         cd app/vendor/iqual-ch/ci-pocketknife-installer/ && \
         source installer.sh && \
-        echo $CI_VR_WORKING_FOLDER/bin" >> $GITHUB_PATH
+        echo "$CI_VR_WORKING_FOLDER/bin" >> $GITHUB_PATH
 
     - name: Collect internal URLs starting from the homepage
       shell: bash
