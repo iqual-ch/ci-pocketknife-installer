@@ -4,15 +4,17 @@ inputs:
   ci_vr_reference_website_url:
     description: 'Reference URL'
     required: true
-  ci_vr_url_list_limit:
-    description: 'Limit URLs list'
-    required: false
-  ci_vr_url_list_randomize:
-    description: 'Randomize URLs list'
-    required: false
   ci_vr_test_website_url:
     description: 'Test URL'
     required: true
+  ci_vr_url_list_limit:
+    description: 'Limit URLs list'
+    required: false
+    default: 20
+  ci_vr_url_list_randomize:
+    description: 'Randomize URLs list'
+    required: false
+    default: false
   ci_vr_working_folder:
     description: 'Working folder on host'
     required: false
