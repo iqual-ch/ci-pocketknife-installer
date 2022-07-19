@@ -23,7 +23,7 @@ runs:
       shell: bash
       run: |
         echo "CI_VR_URL_LIST_LIMIT=${{ env.CI_VR_URL_LIST_LIMIT > 0 && '--limit ' || '' }}${{ env.CI_VR_URL_LIST_LIMIT > 0 && env.CI_VR_URL_LIST_LIMIT || '' }}" >> $GITHUB_ENV && \
-        echo "CI_VR_URL_LIST_RANDOMIZE=${{ env.CI_VR_URL_LIST_RANDOMIZE && env.CI_VR_URL_LIST_RANDOMIZE != 'false' && '--random' || '' }}"  >> $GITHUB_ENV
+        echo "CI_VR_URL_LIST_RANDOMIZE=${{ env.CI_VR_URL_LIST_RANDOMIZE && env.CI_VR_URL_LIST_RANDOMIZE != 'false' && '--random' || '' }}" >> $GITHUB_ENV
 
     - name: Install automated testing tools
       shell: bash
