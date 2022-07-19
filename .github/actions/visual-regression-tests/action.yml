@@ -6,7 +6,7 @@ runs:
     - name: Read dotenv defaults file for visual regression tests
       uses: c-py/action-dotenv-to-setenv@v2
       with:
-        env-file: ./.github/actions/visual-regression-tests/defaults.env.visreg
+        env-file: "${{ github.action_path }}/defaults.env.visreg"
 
     - name: Read dotenv file for visual regression tests
       uses: c-py/action-dotenv-to-setenv@v2
