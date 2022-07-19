@@ -8,5 +8,13 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "repositories": {
+        "private-packagist": {
+            "type": "composer",
+            "url": "https://repo.packagist.com/iqual/"
+        }
+    },
+    "require": {
+        "iqual-ch/ci-github-actions": "1.0.5"
+    }
 }
