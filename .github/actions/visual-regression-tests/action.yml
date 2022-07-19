@@ -4,14 +4,14 @@ runs:
   using: "composite"
   steps:
     - name: Read dotenv defaults file for visual regression tests
-      uses: c-py/action-dotenv-to-setenv@v2
-      with:
-        env-file: "${{ github.action_path }}/defaults.env.visreg"
+      shell: bash
+      run: |
+        grep -v '^#' ${{ github.action_path }}/defaults.env.visreg | grep . >> $GITHUB_ENV
 
     - name: Read dotenv file for visual regression tests
-      uses: c-py/action-dotenv-to-setenv@v2
-      with:
-        env-file: .env.visreg
+      shell: bash
+      run: |
+        grep -v '^#' .env.visreg | grep . >> $GITHUB_ENV
 
     - name: Validate environment variables
       shell: bash
