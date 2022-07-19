@@ -24,6 +24,6 @@
         "packagist.org": false
     },
     "require": {
-        "iqual-ch/ci-github-actions": "1.0.4"
+        "iqual-ch/ci-github-actions": "1.0.5"
     }
 }
