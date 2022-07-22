@@ -18,6 +18,8 @@ CI_VR_DOCKER_NETWORK="${CI_VR_DOCKER_NETWORK:-host}"
 # Create working directory.
 ls -lart
 pwd
+env
+ls -lart $CI_VR_TOOLS_DOCKER_CACHED_FOLDER
 mkdir -p $CI_VR_WORKING_FOLDER/bin
 
 # Get the cached dockerized application.
