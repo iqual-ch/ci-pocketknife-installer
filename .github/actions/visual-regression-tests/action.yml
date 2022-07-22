@@ -4,6 +4,11 @@ runs:
   using: "composite"
   steps:
 
+    - name: Create cache folder
+      shell: bash
+      run: |
+        mkdir -p /tmp/docker-cache
+
     - name: Cache ci-pocketknife docker image
       uses: actions/cache@v3
       with:
