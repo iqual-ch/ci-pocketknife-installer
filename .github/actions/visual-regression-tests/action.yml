@@ -7,13 +7,13 @@ runs:
     - name: Create cache folder
       shell: bash
       run: |
-        mkdir -p docker-cache
+        mkdir -p /tmp/docker-cache
 
     - name: Cache ci-pocketknife docker image
       uses: actions/cache@v3
       with:
-        path: docker-cache
-        key: ci-pocketknife-installer-${{ hashFiles('installer.sh') }}
+        path: /tmp/docker-cache
+        key: ci-pocketknife-installer-${{ hashFiles('**/installer.sh') }}
 
     - name: Read dotenv defaults file for visual regression tests
       shell: bash
