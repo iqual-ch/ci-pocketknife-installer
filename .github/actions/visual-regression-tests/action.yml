@@ -4,15 +4,10 @@ runs:
   using: "composite"
   steps:
 
-    - name: Create cache folder
-      shell: bash
-      run: |
-        mkdir -p ${{ github.action_path }}/docker-cache
-
     - name: Cache ci-pocketknife docker image
       uses: actions/cache@v3
       with:
-        path: ${{ github.action_path }}/docker-cache
+        path: /tmp/docker-cache
         key: ci-pocketknife-installer-${{ hashFiles('**/installer.sh') }}
 
     - name: Read dotenv defaults file for visual regression tests
