@@ -10,14 +10,22 @@
 # + CI_VR_DOCKER_NETWORK=host
 
 CI_VR_TOOLS_DOCKER_TAG=1.0.2
+CI_VR_TOOLS_DOCKER_CACHED_FOLDER=docker-cache
+CI_VR_TOOLS_DOCKER_CACHED_IMAGE_BZIP=$CI_VR_TOOLS_DOCKER_CACHED_FOLDER/ci-pocketknife.tar.bz2
 CI_VR_WORKING_FOLDER="${CI_VR_WORKING_FOLDER:-/tmp/ci}"
 CI_VR_DOCKER_NETWORK="${CI_VR_DOCKER_NETWORK:-host}"
 
 # Create working directory.
 mkdir -p $CI_VR_WORKING_FOLDER/bin
 
-# Get the dockerized application
-docker pull iqualch/ci-pocketknife:$CI_VR_TOOLS_DOCKER_TAG
+# Get the cached dockerized application.
+( [ -f $CI_VR_TOOLS_DOCKER_CACHED_IMAGE_BZIP ] && docker load --input CI_VR_TOOLS_DOCKER_CACHED_IMAGE_BZIP ) \
+||
+# Get the dockerized application and cache it.
+( [ -d $CI_VR_TOOLS_DOCKER_CACHED_FOLDER ] && docker pull iqualch/ci-pocketknife:$CI_VR_TOOLS_DOCKER_TAG && docker save iqualch/ci-pocketknife:$CI_VR_TOOLS_DOCKER_TAG | bzip2 > $CI_VR_TOOLS_DOCKER_CACHED_IMAGE_BZIP )
+||
+# Assuming no cache is enabled.
+( docker pull iqualch/ci-pocketknife:$CI_VR_TOOLS_DOCKER_TAG )
 
 # Create a cli shortcut for the glue commands
 cat << EOF > ${CI_VR_WORKING_FOLDER}/bin/g
