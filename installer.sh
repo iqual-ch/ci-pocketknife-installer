@@ -10,16 +10,12 @@
 # + CI_VR_DOCKER_NETWORK=host
 
 CI_VR_TOOLS_DOCKER_TAG=1.0.2
-CI_VR_TOOLS_DOCKER_CACHED_FOLDER=/tmp/docker-cache
+CI_VR_TOOLS_DOCKER_CACHED_FOLDER=docker-cache
 CI_VR_TOOLS_DOCKER_CACHED_IMAGE_TAR=$CI_VR_TOOLS_DOCKER_CACHED_FOLDER/ci-pocketknife.tgz
 CI_VR_WORKING_FOLDER="${CI_VR_WORKING_FOLDER:-/tmp/ci}"
 CI_VR_DOCKER_NETWORK="${CI_VR_DOCKER_NETWORK:-host}"
 
 # Create working directory.
-ls -lart
-pwd
-env
-ls -lart $CI_VR_TOOLS_DOCKER_CACHED_FOLDER
 mkdir -p $CI_VR_WORKING_FOLDER/bin
 
 # Get the cached dockerized application.
