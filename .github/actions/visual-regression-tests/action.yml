@@ -82,13 +82,16 @@ runs:
       run: |
         g glue:pdf-report
 
-    - name: Upload PDF/HTML report and screenshots
+    - name: Compress all reports and configuration files
+      if: failure()
+      shell: bash
+      run: |
+        tar czf /tmp/artifact.tgz ${{ env.CI_VR_WORKING_FOLDER }}/ 
+
+    - name: Upload PDF/HTML report and configuration
       if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
         path: |
-          ${{ env.CI_VR_WORKING_FOLDER }}/report.pdf
-          ${{ env.CI_VR_WORKING_FOLDER }}/backstop_data/bitmaps_reference
-          ${{ env.CI_VR_WORKING_FOLDER }}/backstop_data/bitmaps_test
-          ${{ env.CI_VR_WORKING_FOLDER }}/backstop_data/html_report
+          /tmp/artifact.tgz
