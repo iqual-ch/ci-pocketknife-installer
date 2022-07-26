@@ -80,18 +80,12 @@ runs:
       if: always()
       shell: bash
       run: |
-        g glue:pdf-report
+        g glue:pdf-report 
 
-    - name: Compress all reports and configuration files
-      if: failure()
-      shell: bash
-      run: |
-        tar czf /tmp/artifact.tgz ${{ env.CI_VR_WORKING_FOLDER }}/ 
-
-    - name: Upload PDF/HTML report and configuration
+    - name: Upload PDF/HTML report(s) and configuration
       if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
         path: |
-          /tmp/artifact.tgz
+          ${{ env.CI_VR_WORKING_FOLDER }}
