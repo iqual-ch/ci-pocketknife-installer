@@ -82,16 +82,9 @@ runs:
       run: |
         g glue:pdf-report
 
-    - name: Upload PDF report
+    - name: Upload configuration and PDF/HTML reports
       if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
-        path: ${{ env.CI_VR_WORKING_FOLDER }}/report.pdf
-
-    - name: Upload HTML report
-      if: failure()
-      uses: actions/upload-artifact@v3
-      with:
-        name: backstopjs-report
-        path: ${{ env.CI_VR_WORKING_FOLDER }}/backstop_data
+        path: ${{ env.CI_VR_WORKING_FOLDER }}
