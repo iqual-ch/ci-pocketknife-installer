@@ -71,20 +71,21 @@ runs:
       run: |
         g glue:backstop:reference --config '/app/data/backstop_config.json'
 
-    - name: Run tests for BackstopJS
+    - name: Run tests for BackstopJS and generate HTML and JSON reports
       shell: bash
       run: |
         g glue:backstop:test --config '/app/data/backstop_config.json'
 
-    - name: Generate report
+    - name: Generate PDF report from JSON report
       if: always()
       shell: bash
       run: |
-        g glue:report
+        g glue:pdf-report 
 
-    - name: Upload report
+    - name: Upload PDF/HTML report(s) and configuration
       if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
-        path: ${{ env.CI_VR_WORKING_FOLDER }}/report.pdf
+        path: |
+          ${{ env.CI_VR_WORKING_FOLDER }}
