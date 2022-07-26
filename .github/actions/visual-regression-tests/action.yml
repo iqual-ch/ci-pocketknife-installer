@@ -71,12 +71,12 @@ runs:
       run: |
         g glue:backstop:reference --config '/app/data/backstop_config.json'
 
-    - name: Run tests for BackstopJS
+    - name: Run tests for BackstopJS and generate HTML and JSON reports
       shell: bash
       run: |
         g glue:backstop:test --config '/app/data/backstop_config.json'
 
-    - name: Generate PDF and HTML reports
+    - name: Generate PDF report from JSON report
       if: always()
       shell: bash
       run: |
