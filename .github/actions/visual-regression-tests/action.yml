@@ -94,4 +94,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: backstopjs-report
-        path: ${{ env.CI_VR_WORKING_FOLDER }}/backstop_data/html_report
+        path: ${{ env.CI_VR_WORKING_FOLDER }}/backstop_data
