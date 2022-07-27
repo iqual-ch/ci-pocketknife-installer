@@ -56,16 +56,6 @@ runs:
         g glue:backstop:config --uris='/app/data/crawled_urls_reference.csv' --url=$CI_VR_TEST_WEBSITE_URL --referenceUrl=$CI_VR_REFERENCE_WEBSITE_URL > $CI_VR_WORKING_FOLDER/backstop_config.json  && \
         cat $CI_VR_WORKING_FOLDER/backstop_config.json
 
-    - name: Cache warming
-      shell: bash
-      run: |
-        cat $CI_VR_WORKING_FOLDER/crawled_urls_reference.csv | while read url; do \
-          time curl -A 'Cache Warmer' -s -L $CI_VR_REFERENCE_WEBSITE_URL${url} >/dev/null 2>&1; \
-          time curl -A 'Cache Warmer' -s -L $CI_VR_TEST_WEBSITE_URL${url} >/dev/null 2>&1; \
-          echo $CI_VR_REFERENCE_WEBSITE_URL${url}; \
-          echo $CI_VR_TEST_WEBSITE_URL${url}; \
-        done
-
     - name: Generate references for BackstopJS
       shell: bash
       run: |
