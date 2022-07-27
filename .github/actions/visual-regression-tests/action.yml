@@ -76,13 +76,7 @@ runs:
       run: |
         g glue:backstop:test --config '/app/data/backstop_config.json'
 
-    - name: Generate PDF report from JSON report
-      if: always()
-      shell: bash
-      run: |
-        g glue:pdf-report 
-
-    - name: Upload PDF/HTML report(s) and configuration
+    - name: Upload report(s) and configuration
       if: failure()
       uses: actions/upload-artifact@v3
       with:
