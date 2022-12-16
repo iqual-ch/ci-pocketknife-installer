@@ -32,6 +32,8 @@ cat << EOF > ${CI_VR_WORKING_FOLDER}/bin/g
 docker run \
     -e CI_VR_REFERENCE_WEBSITE_URL \
     -e CI_VR_TEST_WEBSITE_URL \
+    -e SE_NODE_SESSION_TIMEOUT=700 \
+    --shm-size=256m \
     -v ${CI_VR_WORKING_FOLDER}:/app/data \
     --network ${CI_VR_DOCKER_NETWORK} \
     --rm \
