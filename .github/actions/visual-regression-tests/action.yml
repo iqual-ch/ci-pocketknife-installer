@@ -10,7 +10,7 @@ runs:
         mkdir -p /tmp/docker-cache
 
     - name: Cache ci-pocketknife docker image
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: /tmp/docker-cache
         key: ci-pocketknife-installer-${{ hashFiles('**/installer.sh') }}
@@ -68,7 +68,7 @@ runs:
 
     - name: Upload report(s) and configuration
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: backstopjs-report
         path: |
